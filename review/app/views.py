@@ -12,4 +12,4 @@ class ProductsList(ListView):
 
 
 class ProductView(DetailView):
-    pass
+    model = Product
