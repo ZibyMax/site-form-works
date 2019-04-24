@@ -13,3 +13,8 @@ class ProductsList(ListView):
 
 class ProductView(DetailView):
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductView, self).get_context_data(**kwargs)
+        context['form'] = ReviewForm()
+        return context
