@@ -18,3 +18,6 @@ class ProductView(DetailView):
         context = super(ProductView, self).get_context_data(**kwargs)
         context['form'] = ReviewForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
