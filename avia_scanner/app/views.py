@@ -19,12 +19,13 @@ def cities_lookup(request):
     """Ajax request предлагающий города для автоподстановки, возвращает JSON"""
     results = []
     term = request.GET.get('term')
-    cashed = cache.get(term)
+    cache_key = f'cities_{term}'
+    cashed = cache.get(cache_key)
     if cashed is not None:
         results = cashed
     else:
         if term is not None:
             city = City.objects.filter(name__icontains=term)
             results = [c.name for c in city]
-            cache.set(term, results, 60)
+            cache.set(cache_key, results, 60)
     return JsonResponse(results, safe=False)
